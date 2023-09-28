@@ -5,7 +5,7 @@ import 'package:flutter_bi_banker/utils/encryption.dart';
 
 import '../utils/sharedpreference.dart';
 
-main() {
+void main() async{
   AppConfig.create(
     appName: "Abhinandan BiBanker",
     baseUrl: "",
@@ -14,7 +14,7 @@ main() {
     toolBar: Container(),
     encryption: Encryption(key: "MobBtY4kngvR823B",iv: "bSgitSOFTpvtLtdC")
   );
-
+  UtilSharedPreferences.sp.initSharedPreferences();
   runApp(const MyApp());
 }
 
@@ -91,7 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     // TODO: implement initState
-    UtilSharedPreferences.sp.initSharedPreferences();
+    //UtilSharedPreferences.sp.initSharedPreferences();
     super.initState();
   }
   @override

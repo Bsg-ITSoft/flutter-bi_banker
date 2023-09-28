@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UtilSharedPreferences {
@@ -6,6 +7,7 @@ class UtilSharedPreferences {
   static UtilSharedPreferences sp = UtilSharedPreferences._();
   SharedPreferences? _prefs;
   Future<void> initSharedPreferences() async {
+    WidgetsFlutterBinding.ensureInitialized();
     _prefs = await SharedPreferences.getInstance();
   }
 
