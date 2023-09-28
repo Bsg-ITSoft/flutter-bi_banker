@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
+import 'dart:developer';
+import 'package:flutter_bi_banker/AppConfig.dart';
+import 'package:flutter_bi_banker/utils/encryption.dart';
 
-void main() {
+import '../utils/sharedpreference.dart';
+
+main() {
+  AppConfig.create(
+    appName: "Abhinandan BiBanker",
+    baseUrl: "",
+    primaryColor: Colors.cyan,
+    flavor: Flavor.abhinandan,
+    toolBar: Container(),
+    encryption: Encryption(key: "MobBtY4kngvR823B",iv: "bSgitSOFTpvtLtdC")
+  );
+
   runApp(const MyApp());
 }
 
@@ -57,7 +71,13 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  void _incrementCounter() {
+  _incrementCounter() {
+    log("encrypted \n"+AppConfig.shared.encryption!.encryptMyData("123456"));
+    log("getshared"+UtilSharedPreferences.sp.getString("key")!);
+
+    UtilSharedPreferences.sp.setString("key", "value2");
+    log("getshared"+UtilSharedPreferences.sp.getString("key")!);
+
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
@@ -68,6 +88,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    UtilSharedPreferences.sp.initSharedPreferences();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
